@@ -1,8 +1,12 @@
 [package]
-authors = [
-    "Hunar Roop Kahlon <hunar.roop@gmail.com>"
-]
 name = "uuid_cli"
 version = "0.1.0"
+authors = [
+    "Hunar Roop Kahlon <hunar.roop@gmail.com>",
+    "Xie Yuheng <xyheme@gmail.com>",
+]
+edition = "2018"
 
 [dependencies]
+uuid = { version = "0.7", features = ["v1", "v3", "v4", "v5"] }
+clap = "2"
