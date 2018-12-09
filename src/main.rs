@@ -1,3 +1,9 @@
+mod cli_opts;
+
 fn main() {
-    println!("Hello, world!");
+
+    use structopt::StructOpt;
+
+    let opt = cli_opts::CliOpts::from_args();
+    println!("{:?}", opt);
 }
