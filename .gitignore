@@ -10,4 +10,3 @@ cmake-build-debug/
 
 ### Rust ###
 /target/
-Cargo.lock
