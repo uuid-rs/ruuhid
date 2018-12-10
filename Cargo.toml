@@ -1,3 +1,10 @@
+[[bin]]
+name = "uuid"
+path = "src/main.rs"
+
+[dependencies.structopt]
+version = "0.2.13"
+
 [package]
 authors = [
     "Hunar Roop Kahlon <hunar.roop@gmail.com>"
@@ -5,6 +12,3 @@ authors = [
 edition = "2018"
 name = "uuid_cli"
 version = "0.1.0"
-
-[dependencies.structopt]
-version = "0.2.13"
