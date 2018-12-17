@@ -6,6 +6,7 @@ path = "src/main.rs"
 version = "0.2.13"
 
 [dependencies.uuid]
+features = ["v4"]
 version = "0.7.1"
 
 [package]
