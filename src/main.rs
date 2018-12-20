@@ -43,17 +43,6 @@ fn main() -> Result<(), Box<error::Error>> {
         let instant = std::time::SystemTime::now();
         let duration = instant.duration_since(std::time::UNIX_EPOCH)?;
         let mut context = uuid::v1::Context::new(0);
-
-        uuid::v1::ClockSequence::generate_sequence(&context, 0, 0);
-
-        println!("{:?}", instant);
-        println!("Duration: {:?}", duration);
-
-        println!(
-            "seconds: {}, nanos: {}",
-            duration.as_secs(),
-            duration.subsec_nanos()
-        );
         let uuid = uuid::Uuid::new_v1(
             &context,
             duration.as_secs(),
