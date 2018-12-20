@@ -60,6 +60,10 @@ pub struct CliOpts {
 }
 
 impl CliOpts {
+    pub fn hex(&self) -> bool {
+        self.hex
+    }
+
     pub fn name(&self) -> Option<&str> {
         if let Some(name) = &self.name {
             Some(&name)
