@@ -2,6 +2,9 @@
 name = "uuid"
 path = "src/main.rs"
 
+[dependencies.mac_address]
+version = "1.0.0"
+
 [dependencies.structopt]
 version = "0.2.13"
 

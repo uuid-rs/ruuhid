@@ -58,3 +58,33 @@ pub struct CliOpts {
     )]
     time: bool,
 }
+
+impl CliOpts {
+    pub fn name(&self) -> Option<&str> {
+        if let Some(name) = &self.name {
+            Some(&name)
+        } else {
+            None
+        }
+    }
+
+    pub fn namespace(&self) -> Option<uuid::Uuid> {
+        self.namespace
+    }
+
+    pub fn md5(&self) -> bool {
+        self.md5
+    }
+
+    pub fn random(&self) -> bool {
+        self.random
+    }
+
+    pub fn sha1(&self) -> bool {
+        self.sha1
+    }
+
+    pub fn time(&self) -> bool {
+        self.time
+    }
+}
