@@ -1,8 +1,10 @@
 #[derive(Debug, structopt::StructOpt)]
 #[structopt(name = "uuid")]
 pub struct CliOpts {
+    /// Interpret name as hex string
     #[structopt(long = "--hex", short = "-x")]
     hex: bool,
+    /// Generate md5 hash
     #[structopt(
         long = "--md5",
         raw(
@@ -18,10 +20,13 @@ pub struct CliOpts {
         short = "-m"
     )]
     md5: bool,
+    /// Generate hash-based uuid from this `name`
     #[structopt(long = "--name", short = "-N")]
     name: Option<String>,
+    /// Generate hash-based uuid in this `namespace`
     #[structopt(long = "--namespace", short = "-n")]
     namespace: Option<uuid::Uuid>,
+    /// Generate random-based uuid
     #[structopt(
         long = "--random",
         raw(conflicts_with_all = "&[\
@@ -32,6 +37,7 @@ pub struct CliOpts {
         short = "-r"
     )]
     random: bool,
+    /// Generate sha1 hash
     #[structopt(
         long = "--sha1",
         raw(
@@ -47,6 +53,7 @@ pub struct CliOpts {
         short = "-s"
     )]
     sha1: bool,
+    /// Generate time-based uuid
     #[structopt(
         long = "--time",
         raw(conflicts_with_all = "&[\
