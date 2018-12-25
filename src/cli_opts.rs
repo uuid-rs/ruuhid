@@ -8,32 +8,46 @@ pub struct CliOpts {
     #[structopt(
         long = "--md5",
         raw(
-            conflicts_with_all = "&[\
-                                  \"random\",\
-                                  \"sha1\",\
-                                  \"time\"\
+            conflicts_with_all = "&[
+                                  \"random\",
+                                  \"sha1\",
+                                  \"time\"
                                   ]",
-            requires_all = "&[\
+            requires_all = "&[
                                     \"name\",
-                                    \"namespace\"\
+                                    \"namespace\"
                                     ]"
         ),
         short = "-m"
     )]
     md5: bool,
     /// Generate hash-based uuid from this `name`
-    #[structopt(long = "--name", short = "-N")]
+    #[structopt(
+        long = "--name",
+        raw(conflicts_with_all = "&[
+                                  \"random\",
+                                  \"time\"
+                                  ]"),
+        short = "-N"
+    )]
     name: Option<String>,
     /// Generate hash-based uuid in this `namespace`
-    #[structopt(long = "--namespace", short = "-n")]
+    #[structopt(
+        long = "--namespace",
+        raw(conflicts_with_all = "&[
+                                  \"random\",
+                                  \"time\"
+                                  ]"),
+        short = "-n"
+    )]
     namespace: Option<uuid::Uuid>,
     /// Generate random-based uuid
     #[structopt(
         long = "--random",
-        raw(conflicts_with_all = "&[\
-                                  \"md5\",\
-                                  \"sha1\",\
-                                  \"time\"\
+        raw(conflicts_with_all = "&[
+                                  \"md5\",
+                                  \"sha1\",
+                                  \"time\"
                                   ]"),
         short = "-r"
     )]
@@ -42,14 +56,14 @@ pub struct CliOpts {
     #[structopt(
         long = "--sha1",
         raw(
-            conflicts_with_all = "&[\
-                                  \"md5\",\
-                                  \"random\",\
-                                  \"time\"\
+            conflicts_with_all = "&[
+                                  \"md5\",
+                                  \"random\",
+                                  \"time\"
                                   ]",
-            requires_all = "&[\
+            requires_all = "&[
                                     \"name\",
-                                    \"namespace\"\
+                                    \"namespace\"
                                     ]"
         ),
         short = "-s"
@@ -58,12 +72,11 @@ pub struct CliOpts {
     /// Generate time-based uuid
     #[structopt(
         long = "--time",
-        raw(conflicts_with_all = "&[\
-                                  \"md5\",\
-                                  \"random\",\
-                                  \"sha1\"\
-                                  ]"
-        ),
+        raw(conflicts_with_all = "&[
+                                  \"md5\",
+                                  \"random\",
+                                  \"sha1\"
+                                  ]"),
         short = "-t"
     )]
     time: bool,
