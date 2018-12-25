@@ -35,6 +35,7 @@ fn main() -> Result<(), Box<error::Error>> {
     if opts.time() {
         let maybe_mac_address = mac_address::get_mac_address()?;
 
+        // TODO: dont use the io::Error
         if let None = maybe_mac_address {
             return Err(Box::new(std::io::Error::from_raw_os_error(-1)));
         }
