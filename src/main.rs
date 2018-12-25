@@ -2,6 +2,26 @@ use std::error;
 
 mod cli_opts;
 
+macro_rules! hashed {
+    (v3, $opts: expr) => {
+        {
+            let name = $opts.name().unwrap();
+            let namespace = $opts.namespace().unwrap();
+
+            uuid::Uuid::new_v3(&namespace, name.as_bytes())
+        }
+    };
+
+    (v5, $opts: expr) => {
+        {
+            let name = $opts.name().unwrap();
+            let namespace = $opts.namespace().unwrap();
+
+            uuid::Uuid::new_v5(&namespace, name.as_bytes())
+        }
+    };
+}
+
 fn main() -> Result<(), Box<error::Error>> {
     let opts = {
         use structopt::StructOpt;
@@ -11,24 +31,16 @@ fn main() -> Result<(), Box<error::Error>> {
 
     // --md5
     if opts.md5() {
-        // clap ensures that namespace url exists
-        let name = opts.name().unwrap();
-        let namespace = opts.namespace().unwrap();
-
-        let uuid = uuid::Uuid::new_v3(&namespace, name.as_bytes());
+        let uuid = hashed!(v3, opts);
         println!("{}", uuid);
-        return Ok(());
+        return Ok(())
     }
 
     // --sha1
     if opts.sha1() {
-        // clap ensures that namespace url exists
-        let name = opts.name().unwrap();
-        let namespace = opts.namespace().unwrap();
-
-        let uuid = uuid::Uuid::new_v5(&namespace, name.as_bytes());
+        let uuid = hashed!(v5, opts);
         println!("{}", uuid);
-        return Ok(());
+        return Ok(())
     }
 
     // --time
@@ -52,10 +64,10 @@ fn main() -> Result<(), Box<error::Error>> {
         )?;
         println!("{}", uuid);
 
-        return Ok(());
+        return Ok(())
     }
 
     // --random or fallback
     println!("{:x}", uuid::Uuid::new_v4());
-    return Ok(());
+    return Ok(())
 }
