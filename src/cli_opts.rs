@@ -15,7 +15,8 @@ pub struct CliOpts {
                                   ]",
             requires_all = "&[\
                                     \"name\",
-                                    \"namespace\"]"
+                                    \"namespace\"\
+                                    ]"
         ),
         short = "-m"
     )]
@@ -48,7 +49,8 @@ pub struct CliOpts {
                                   ]",
             requires_all = "&[\
                                     \"name\",
-                                    \"namespace\"]"
+                                    \"namespace\"\
+                                    ]"
         ),
         short = "-s"
     )]
@@ -60,7 +62,8 @@ pub struct CliOpts {
                                   \"md5\",\
                                   \"random\",\
                                   \"sha1\"\
-                                  ]"),
+                                  ]"
+        ),
         short = "-t"
     )]
     time: bool,
