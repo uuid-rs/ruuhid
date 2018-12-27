@@ -40,7 +40,7 @@ pub struct CliOpts {
                                   ]"#),
         short = "-n"
     )]
-    namespace: Option<uuid::Uuid>,
+    namespace: Option<crate::NamespaceUuid>,
     /// Generate random-based uuid
     #[structopt(
         long = "--random",
@@ -83,10 +83,12 @@ pub struct CliOpts {
 }
 
 impl CliOpts {
+    /// The `--hex` or `-x` flag is present.
     pub fn hex(&self) -> bool {
         self.hex
     }
 
+    /// The `--name` or `-N option is present.
     pub fn name(&self) -> Option<&str> {
         if let Some(name) = &self.name {
             Some(&name)
@@ -95,22 +97,27 @@ impl CliOpts {
         }
     }
 
-    pub fn namespace(&self) -> Option<uuid::Uuid> {
+    /// The `--namespace` or `-n` option is present.
+    pub fn namespace(&self) -> Option<crate::NamespaceUuid> {
         self.namespace
     }
 
+    /// The `--md5` or `-m` flag is present.
     pub fn md5(&self) -> bool {
         self.md5
     }
 
+    /// The `--random` or `-r` flag is present.
     pub fn random(&self) -> bool {
         self.random
     }
 
+    /// The `--sha1` or `-s` flag is present.
     pub fn sha1(&self) -> bool {
         self.sha1
     }
 
+    /// The `--time` or `-t` flag is present.
     pub fn time(&self) -> bool {
         self.time
     }
