@@ -85,12 +85,15 @@ fn main() -> Result<(), Box<error::Error>> {
         // TODO: dont use the io::Error
         if let None = maybe_mac_address {
             return Err(Box::new(std::io::Error::from_raw_os_error(-1)));
-        }
 
+        }
         let mac_address = maybe_mac_address.unwrap();
         let instant = std::time::SystemTime::now();
         let duration = instant.duration_since(std::time::UNIX_EPOCH)?;
-        let context = uuid::v1::Context::new(0);
+
+        include!(concat!(env!("OUT_DIR"), "/build_context_compute.rs"));
+        let context = uuid::v1::Context::new(context_value());
+
         let uuid = uuid::Uuid::new_v1(
             &context,
             duration.as_secs(),
