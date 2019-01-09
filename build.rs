@@ -12,7 +12,7 @@ fn main() -> Result<(), Box<error::Error>> {
 
     let mut buffer = String::new();
     buffer.push_str(r#"
-        fn context_value() -> u16 {
+        const fn context_value() -> u16 {
     "#);
 
     buffer.push_str(&version_context.to_string());

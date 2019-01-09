@@ -3,6 +3,8 @@ use std::error;
 mod cli_opts;
 mod core_support;
 
+include!(concat!(env!("OUT_DIR"), "/build_context_compute.rs"));
+
 macro_rules! hashed {
     (v3, $opts: expr) => {
         {
@@ -90,8 +92,6 @@ fn main() -> Result<(), Box<error::Error>> {
         let mac_address = maybe_mac_address.unwrap();
         let instant = std::time::SystemTime::now();
         let duration = instant.duration_since(std::time::UNIX_EPOCH)?;
-
-        include!(concat!(env!("OUT_DIR"), "/build_context_compute.rs"));
         let context = uuid::v1::Context::new(context_value());
 
         let uuid = uuid::Uuid::new_v1(
