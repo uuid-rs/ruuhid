@@ -11,13 +11,17 @@ fn main() -> Result<(), Box<error::Error>> {
         + rustc_version.patch) as u16;
 
     let mut buffer = String::new();
-    buffer.push_str(r#"
+    buffer.push_str(
+        r#"
         const fn context_value() -> u16 {
-    "#);
+    "#,
+    );
 
     buffer.push_str(&version_context.to_string());
-    buffer.push_str(r#"
-    }"#);
+    buffer.push_str(
+        r#"
+    }"#,
+    );
 
     io::Write::write_all(&mut f, &buffer.as_bytes())?;
 
