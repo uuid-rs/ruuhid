@@ -7,15 +7,29 @@ pub struct CliOpts {
     /// Generate md5 hash
     #[structopt(
         long = "--md5",
-        raw(requires_all = r#"&[
-                                    "name",
-                                    "namespace"
-                                    ]"#),
+        raw(
+            conflicts_With_all = r#"&[
+                                   "random",
+                                   "sha1",
+                                   "time"
+                                   ]"#,
+            requires_all = r#"&[
+                             "name",
+                             "namespace"
+                             ]"#
+        ),
         short = "-m"
     )]
     md5: bool,
     /// Generate hash-based uuid from this `name`
-    #[structopt(long = "--name", short = "-N")]
+    #[structopt(
+        long = "--name",
+        raw(conflicts_with_all = r#"&[
+                                      "random",
+                                      "time"
+                                      ]"#),
+        short = "-N"
+    )]
     name: Option<String>,
     /// Generate hash-based uuid in this `namespace`
     #[structopt(
@@ -28,20 +42,43 @@ pub struct CliOpts {
     )]
     namespace: Option<crate::NamespaceUuid>,
     /// Generate random-based uuid
-    #[structopt(long = "--random", short = "-r")]
+    #[structopt(
+        long = "--random",
+        raw(conflicts_with_all = r#"&[
+                                  "md5",
+                                  "sha1",
+                                  "time"
+                                  ]"#),
+        short = "-r"
+    )]
     random: bool,
     /// Generate sha1 hash
     #[structopt(
         long = "--sha1",
-        raw(requires_all = r#"&[
+        raw(
+            conflicts_with_all = r#"&[
+                                  "md5",
+                                  "random",
+                                  "time"
+                                  ]"#,
+            requires_all = r#"&[
                                     "name",
                                     "namespace"
-                                    ]"#),
+                                    ]"#
+        ),
         short = "-s"
     )]
     sha1: bool,
     /// Generate time-based uuid
-    #[structopt(long = "--time", short = "-t")]
+    #[structopt(
+        long = "--time",
+        raw(conflicts_with_all = r#"&[
+                                  "md5",
+                                  "random",
+                                  "sha1"
+                                  ]"#),
+        short = "-t"
+    )]
     time: bool,
 }
 
