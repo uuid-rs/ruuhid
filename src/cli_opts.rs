@@ -8,7 +8,7 @@ pub struct CliOpts {
     #[structopt(
         long = "--md5",
         raw(
-            conflicts_With_all = r#"&[
+            conflicts_with_all = r#"&[
                                    "random",
                                    "sha1",
                                    "time"
