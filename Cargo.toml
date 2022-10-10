@@ -4,11 +4,14 @@ version = "0.0.0"
 edition = "2021"
 
 
-[dependencies.structopt]
-version = "0.3.25"
+[dependencies.clap]
+features = [
+    "derive"
+]
+version = "^4.0"
 
 [dependencies.uuid]
 features = [
     "v4"
 ]
-version = "1.0.0-alpha.1"
+version = "^1.2"
