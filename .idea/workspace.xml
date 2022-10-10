@@ -19,7 +19,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
       <updated>1665436856962</updated>
       <workItem from="1665436859146" duration="650000" />
       <workItem from="1665437539458" duration="2400000" />
-      <workItem from="1665440002146" duration="1648000" />
+      <workItem from="1665440002146" duration="1950000" />
     </task>
     <servers />
   </component>
