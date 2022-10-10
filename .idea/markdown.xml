@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MarkdownSettings">
+    <option name="customStylesheetText" value="@impot https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.0.0/github-markdown.min.css" />
+    <enabledExtensions>
+      <entry key="MermaidLanguageExtension" value="false" />
+      <entry key="PlantUMLLanguageExtension" value="false" />
+    </enabledExtensions>
+  </component>
+</project>
