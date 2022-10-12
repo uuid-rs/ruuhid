@@ -5,40 +5,41 @@ fn main() {
     let opts: Opts = clap::Parser::parse();
 
     match opts {
-        Opts::Generate(opts) => {
-            match opts.version {
-                GenerateVersionOpts::Nil(opts) => {
-                    (0..opts.number).for_each(|_| {
-                        let uuid = uuid::Uuid::nil();
+        Opts::Generate(opts) => match opts.version {
+            GenerateVersionOpts::Nil(opts) => {
+                (0..opts.number).for_each(|_| {
+                    let uuid = uuid::Uuid::nil();
+                    let format = &opts.format;
+                    let case = &opts.case;
 
-
-                        match (&opts.case, &opts.format) {
-                            (CaseOpts::Lower, FormatOpts::Hyphenated) => println!("{:x}", uuid.hyphenated()),
-                            (CaseOpts::Upper, FormatOpts::Hyphenated) => println!("{:X}", uuid.hyphenated()),
-                            (CaseOpts::Lower, FormatOpts::Simple) => println!("{:x}", uuid.simple()),
-                            (CaseOpts::Upper, FormatOpts::Simple) => println!("{:X}", uuid.simple()),
-                            (CaseOpts::Lower, FormatOpts::Urn) => println!("{:x}", uuid.urn()),
-                            (CaseOpts::Upper, FormatOpts::Urn) => println!("{:X}", uuid.urn()),
-                        }
-                    });
-                }
-                GenerateVersionOpts::Mac => {}
-                GenerateVersionOpts::Dce => {}
-                GenerateVersionOpts::Md5 => {}
-                GenerateVersionOpts::Random => {}
-                GenerateVersionOpts::Sha1 => {}
+                    match case {
+                        CaseOpts::Lower => match format {
+                            FormatOpts::Hyphenated => println!("{:x}", uuid.hyphenated()),
+                            FormatOpts::Simple => println!("{:x}", uuid.simple()),
+                            FormatOpts::Urn => println!("{:x}", uuid.urn()),
+                        },
+                        CaseOpts::Upper => match format {
+                            FormatOpts::Hyphenated => println!("{:X}", uuid.hyphenated()),
+                            FormatOpts::Simple => println!("{:X}", uuid.simple()),
+                            FormatOpts::Urn => println!("{:X}", uuid.urn()),
+                        },
+                    }
+                });
             }
+            GenerateVersionOpts::Mac => {}
+            GenerateVersionOpts::Dce => {}
+            GenerateVersionOpts::Md5 => {}
+            GenerateVersionOpts::Random => {}
+            GenerateVersionOpts::Sha1 => {}
         },
-        Opts::Parse => {
-
-        },
+        Opts::Parse => {}
     }
 }
 
 #[derive(clap::Parser)]
 #[clap(about, author, version)]
 enum Opts {
-   #[clap(aliases= &["g", "gen"])]
+    #[clap(aliases= &["g", "gen"])]
     Generate(GenerateOpts),
     #[clap(aliases = &["p"])]
     Parse,
