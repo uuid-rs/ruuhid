@@ -23,7 +23,7 @@ fn main() {
                             FormatOpts::Braced => println!("{:X}", uuid.braced()),
                             FormatOpts::Hyphenated => println!("{:X}", uuid.hyphenated()),
                             FormatOpts::Simple => println!("{:X}", uuid.simple()),
-                            FormatOpts::Urn => println!("{:X}", uuid.urn()),
+                            FormatOpts::Urn => panic!("UUID URN format is not supported in uppercase"),
                         },
                     }
                 });
@@ -31,7 +31,28 @@ fn main() {
             GenerateVersionOpts::Mac => {}
             GenerateVersionOpts::Dce => {}
             GenerateVersionOpts::Md5 => {}
-            GenerateVersionOpts::Random => {}
+            GenerateVersionOpts::Random(opts) => {
+                (0..opts.number).for_each(|_| {
+                    let uuid = uuid::Uuid::new_v4();
+                    let format = &opts.format;
+                    let case = &opts.case;
+
+                    match case {
+                        CaseOpts::Lower => match format {
+                            FormatOpts::Braced => println!("{:x}", uuid.braced()),
+                            FormatOpts::Hyphenated => println!("{:x}", uuid.hyphenated()),
+                            FormatOpts::Simple => println!("{:x}", uuid.simple()),
+                            FormatOpts::Urn => println!("{:x}", uuid.urn()),
+                        },
+                        CaseOpts::Upper => match format {
+                            FormatOpts::Braced => println!("{:X}", uuid.braced()),
+                            FormatOpts::Hyphenated => println!("{:X}", uuid.hyphenated()),
+                            FormatOpts::Simple => println!("{:X}", uuid.simple()),
+                            FormatOpts::Urn => panic!("UUID URN format is not supported in uppercase"),
+                        },
+                    }
+                });
+            }
             GenerateVersionOpts::Sha1 => {}
         },
         Opts::Parse => {}
@@ -65,13 +86,23 @@ enum GenerateVersionOpts {
     #[clap(aliases = &["3", "v3"])]
     Md5,
     #[clap(aliases = &["4", "v4"])]
-    Random,
+    Random(GenerateRandomOpts),
     #[clap(aliases = &["5", "v5"])]
     Sha1,
 }
 
 #[derive(clap::Parser)]
 struct GenerateNilOpts {
+    #[clap(short, long, default_value = "lowercase")]
+    case: CaseOpts,
+    #[clap(short, long, default_value = "1")]
+    number: usize,
+    #[clap(short, long, default_value = "hyphenated")]
+    format: FormatOpts,
+}
+
+#[derive(clap::Parser)]
+struct GenerateRandomOpts {
     #[clap(short, long, default_value = "lowercase")]
     case: CaseOpts,
     #[clap(short, long, default_value = "1")]
