@@ -14,11 +14,13 @@ fn main() {
 
                     match case {
                         CaseOpts::Lower => match format {
+                            FormatOpts::Braced => println!("{:x}", uuid.braced()),
                             FormatOpts::Hyphenated => println!("{:x}", uuid.hyphenated()),
                             FormatOpts::Simple => println!("{:x}", uuid.simple()),
                             FormatOpts::Urn => println!("{:x}", uuid.urn()),
                         },
                         CaseOpts::Upper => match format {
+                            FormatOpts::Braced => println!("{:X}", uuid.braced()),
                             FormatOpts::Hyphenated => println!("{:X}", uuid.hyphenated()),
                             FormatOpts::Simple => println!("{:X}", uuid.simple()),
                             FormatOpts::Urn => println!("{:X}", uuid.urn()),
@@ -80,6 +82,7 @@ struct GenerateNilOpts {
 
 #[derive(Clone, clap::Parser)]
 enum FormatOpts {
+    Braced,
     Hyphenated,
     Simple,
     Urn,
@@ -90,6 +93,7 @@ impl str::FromStr for FormatOpts {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "braced" | "b" => Ok(FormatOpts::Braced),
             "hyphenated" | "hypen" | "h" => Ok(FormatOpts::Hyphenated),
             "simple" | "s" => Ok(FormatOpts::Simple),
             "urn" | "u" => Ok(FormatOpts::Urn),
