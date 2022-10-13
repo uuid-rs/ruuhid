@@ -2,6 +2,7 @@ use crate::opts::{Opts, VersionOpts};
 use uuid;
 use crate::opts::common as common_opts;
 
+mod execute;
 mod opts;
 
 fn main() {
@@ -35,9 +36,9 @@ fn main() {
                     }
                 });
             }
-            VersionOpts::Mac => {}
-            VersionOpts::Dce => {}
-            VersionOpts::Md5 => {}
+            VersionOpts::Mac => todo!("MAC UUID generation is not supported"),
+            VersionOpts::Dce => todo!("DCE UUID generation is not supported"),
+            VersionOpts::Md5 => todo!("MD5 UUID generation is not supported"),
             VersionOpts::Random {
                 case,
                 format,
@@ -64,12 +65,8 @@ fn main() {
                     }
                 });
             }
-            VersionOpts::Sha1 => {}
+            VersionOpts::Sha1 => todo!("SHA1 UUID generation is not supported"),
         },
         Opts::Parse => {}
     }
-}
-
-trait Execute<T = ()> {
-    fn execute(&self) -> T;
 }

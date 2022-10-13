@@ -1,16 +1,16 @@
 pub mod common;
 mod generate;
 
-// Temporary workaround for allowing main.rs to access the `VersionOpts` enum.
-use crate::Execute;
+/// Temporary workaround for allowing main.rs to access the [`VersionOpts`] enum.
 pub use generate::VersionOpts;
+use crate::execute::Execute;
 
 /// ruuhid is a command line tool for generating and parsing UUIDs.
 #[derive(clap::Parser)]
 #[clap(about, author, version)]
 pub enum Opts {
     /// Generate a UUID.
-    #[clap(aliases= &["g", "gen"], about, version)]
+    #[clap(aliases= &["g", "gen"], version)]
     Generate {
         #[clap(subcommand)]
         version: generate::VersionOpts,
